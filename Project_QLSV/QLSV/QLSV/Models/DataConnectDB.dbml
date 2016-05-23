@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QlSV" Class="DataConnectDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SOPHEAK-PC;Initial Catalog=QlSV;User ID=sa" SettingsObjectName="QLSV.Properties.Settings" SettingsPropertyName="QlSVConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_bomon" Member="tbl_bomons">
+    <Type Name="tbl_bomon">
+      <Column Name="MaBoMon" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenBoMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MaKhoa" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="tbl_bomon_tbl_lopmh" Member="tbl_lopmh" ThisKey="MaBoMon" OtherKey="MaLopMH" Type="tbl_lopmh" Cardinality="One" />
+      <Association Name="tbl_bomon_tbl_lopql" Member="tbl_lopqls" ThisKey="MaBoMon" OtherKey="MaBoMon" Type="tbl_lopql" />
+      <Association Name="tbl_khoa_tbl_bomon" Member="tbl_khoa" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="tbl_khoa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_diem" Member="tbl_diems">
+    <Type Name="tbl_diem">
+      <Column Name="MaDiem" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaLopMH" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaSV" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DiemQT" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DiemThi" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="tbl_lopmh_tbl_diem" Member="tbl_lopmh" ThisKey="MaLopMH" OtherKey="MaLopMH" Type="tbl_lopmh" IsForeignKey="true" />
+      <Association Name="tbl_sinhvien_tbl_diem" Member="tbl_sinhvien" ThisKey="MaSV" OtherKey="MaSV" Type="tbl_sinhvien" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_hocky" Member="tbl_hockies">
+    <Type Name="tbl_hocky">
+      <Column Name="MaHocKy" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenHocKy" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="tbl_hocky_tbl_lopmh" Member="tbl_lopmhs" ThisKey="MaHocKy" OtherKey="MaHocKy" Type="tbl_lopmh" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_khoa" Member="tbl_khoas">
+    <Type Name="tbl_khoa">
+      <Column Name="MaKhoa" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKhoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="tbl_khoa_tbl_bomon" Member="tbl_bomons" ThisKey="MaKhoa" OtherKey="MaKhoa" Type="tbl_bomon" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_khoahoc" Member="tbl_khoahocs">
+    <Type Name="tbl_khoahoc">
+      <Column Name="MaKhoaHoc" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKhoaHoc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="tbl_khoahoc_tbl_lopql" Member="tbl_lopqls" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="tbl_lopql" />
+      <Association Name="tbl_khoahoc_tbl_sinhvien" Member="tbl_sinhviens" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="tbl_sinhvien" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_lopmh" Member="tbl_lopmhs">
+    <Type Name="tbl_lopmh">
+      <Column Name="MaLopMH" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLopMH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaMon" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaHocKy" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaNamHoc" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="tbl_lopmh_tbl_diem" Member="tbl_diems" ThisKey="MaLopMH" OtherKey="MaLopMH" Type="tbl_diem" />
+      <Association Name="tbl_lopmh_tbl_monhoc" Member="tbl_monhoc" ThisKey="MaLopMH" OtherKey="MaMon" Type="tbl_monhoc" Cardinality="One" />
+      <Association Name="tbl_bomon_tbl_lopmh" Member="tbl_bomon" ThisKey="MaLopMH" OtherKey="MaBoMon" Type="tbl_bomon" IsForeignKey="true" />
+      <Association Name="tbl_hocky_tbl_lopmh" Member="tbl_hocky" ThisKey="MaHocKy" OtherKey="MaHocKy" Type="tbl_hocky" IsForeignKey="true" />
+      <Association Name="tbl_namhoc_tbl_lopmh" Member="tbl_namhoc" ThisKey="MaNamHoc" OtherKey="MaNamHoc" Type="tbl_namhoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_lopql" Member="tbl_lopqls">
+    <Type Name="tbl_lopql">
+      <Column Name="MaLopQL" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLopQL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SiSo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaBoMon" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaKhoaHoc" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="tbl_lopql_tbl_sinhvien" Member="tbl_sinhviens" ThisKey="MaLopQL" OtherKey="MaLopQL" Type="tbl_sinhvien" />
+      <Association Name="tbl_bomon_tbl_lopql" Member="tbl_bomon" ThisKey="MaBoMon" OtherKey="MaBoMon" Type="tbl_bomon" IsForeignKey="true" />
+      <Association Name="tbl_khoahoc_tbl_lopql" Member="tbl_khoahoc" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="tbl_khoahoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_monhoc" Member="tbl_monhocs">
+    <Type Name="tbl_monhoc">
+      <Column Name="MaMon" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MaBoMon" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SoTinChi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_lopmh_tbl_monhoc" Member="tbl_lopmh" ThisKey="MaMon" OtherKey="MaLopMH" Type="tbl_lopmh" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_namhoc" Member="tbl_namhocs">
+    <Type Name="tbl_namhoc">
+      <Column Name="MaNamHoc" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNamHoc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="tbl_namhoc_tbl_lopmh" Member="tbl_lopmhs" ThisKey="MaNamHoc" OtherKey="MaNamHoc" Type="tbl_lopmh" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_sinhvien" Member="tbl_sinhviens">
+    <Type Name="tbl_sinhvien">
+      <Column Name="MaSV" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="QueQuan" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MaLopQL" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="MaKhoaHoc" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="tbl_sinhvien_tbl_diem" Member="tbl_diems" ThisKey="MaSV" OtherKey="MaSV" Type="tbl_diem" />
+      <Association Name="tbl_khoahoc_tbl_sinhvien" Member="tbl_khoahoc" ThisKey="MaKhoaHoc" OtherKey="MaKhoaHoc" Type="tbl_khoahoc" IsForeignKey="true" />
+      <Association Name="tbl_lopql_tbl_sinhvien" Member="tbl_lopql" ThisKey="MaLopQL" OtherKey="MaLopQL" Type="tbl_lopql" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_taikhoan" Member="tbl_taikhoans">
+    <Type Name="tbl_taikhoan">
+      <Column Name="TaiKhoan" Type="System.String" DbType="NVarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="NVarChar(12)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
